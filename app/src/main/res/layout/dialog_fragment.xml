@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/text_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:text="Вы хотите выйти?">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="Да"
+            app:iconTint="#DFD3D3"></Button>
+        <Button
+            android:id="@+id/btn_n"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет">
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>
