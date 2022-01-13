@@ -5,13 +5,24 @@
       <map>
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/background.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/corner_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_baseline_video_library.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_round_favorite.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_round_menu.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_round_settings.xml" value="0.3828125" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_round_video_library.xml" value="0.31197916666666664" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/drawable/ic_round_watch_later.xml" value="0.3828125" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/activity_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/activity_dialogfragment1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/dialog_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/film_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/fragment_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/fragment_dialog1.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/fragment_favorites.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/menu/navigation_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/FilmsSearching/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Turner/AndroidStudioProjects/MyApplication5/app/src/main/res/layout/activity_main.xml" value="0.2907608695652174" />
