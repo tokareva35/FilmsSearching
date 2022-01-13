@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-
-import kotlinx.android.synthetic.main.fragment_dialog1.*
+import kotlinx.android.synthetic.main.dialog_fragment.*
 
 class DialogFragment1 : DialogFragment() {
 
-    override fun onCreateView(
+        override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_dialog1, container, false)
+        return inflater.inflate(R.layout.dialog_fragment, container, false)
 
     }
 

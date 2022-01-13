@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
 
-        //Запускаем фрагмент при старте
+        //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
+    override fun onBackPressed() {
+        DialogFragment1().show(supportFragmentManager, "dialog1")
+    }
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
         val bundle = Bundle()
@@ -45,11 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_placeholder, FavoritesFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.watch_later -> {
