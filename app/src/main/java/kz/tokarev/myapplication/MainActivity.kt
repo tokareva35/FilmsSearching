@@ -4,16 +4,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kz.tokarev.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         initNavigation()
-
-        //Зупускаем фрагмент при старте
+        //Запускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
@@ -21,7 +23,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
         val bundle = Bundle()
