@@ -11,19 +11,20 @@
         android:theme="@style/Theme.MyApplication">
 
         <activity
-            android:name=".DetailsFragment"
-            android:exported="false" />
+            android:name=".MainActivity">
+        </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
 
 </manifest>
+
+
+
