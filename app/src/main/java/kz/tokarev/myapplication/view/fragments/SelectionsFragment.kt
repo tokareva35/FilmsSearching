@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_selections.*
 import kz.tokarev.myapplication.databinding.FragmentSelectionsBinding
+import kz.tokarev.myapplication.utils.AnimationHelper
 
 class SelectionsFragment : Fragment() {
 

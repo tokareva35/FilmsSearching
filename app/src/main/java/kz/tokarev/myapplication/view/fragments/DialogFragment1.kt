@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.view.fragments
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_fragment.*
+import kz.tokarev.myapplication.R
 
 class DialogFragment1 : DialogFragment() {
 

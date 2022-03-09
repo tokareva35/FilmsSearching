@@ -1,9 +1,12 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.film_item.view.*
+import kz.tokarev.myapplication.view.rv_viewholders.FilmViewHolder
+import kz.tokarev.myapplication.R
+import kz.tokarev.myapplication.domain.Film
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
+import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
+import kz.tokarev.myapplication.view.MainActivity
+import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import kz.tokarev.myapplication.databinding.FragmentFavoritesBinding
+import kz.tokarev.myapplication.domain.Film
+import kz.tokarev.myapplication.utils.AnimationHelper
 
 class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
@@ -29,7 +34,7 @@ class FavoritesFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(),2)
 
         binding.favoritesRecycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }

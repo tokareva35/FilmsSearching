@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import com.airbnb.lottie.LottieAnimationView
-import kotlinx.android.synthetic.main.activity_splash_screen.*
+import kz.tokarev.myapplication.view.MainActivity
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

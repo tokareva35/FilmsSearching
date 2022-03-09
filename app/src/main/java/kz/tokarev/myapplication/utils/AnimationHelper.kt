@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.utils
 
 import android.app.Activity
 import android.view.View
