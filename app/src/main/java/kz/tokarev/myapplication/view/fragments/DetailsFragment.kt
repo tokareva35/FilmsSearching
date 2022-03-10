@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.view.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_details.*
+import kz.tokarev.myapplication.R
 import kz.tokarev.myapplication.databinding.FragmentDetailsBinding
+import kz.tokarev.myapplication.domain.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film

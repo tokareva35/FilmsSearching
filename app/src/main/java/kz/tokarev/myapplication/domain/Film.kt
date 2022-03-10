@@ -1,4 +1,4 @@
-package kz.tokarev.myapplication
+package kz.tokarev.myapplication.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

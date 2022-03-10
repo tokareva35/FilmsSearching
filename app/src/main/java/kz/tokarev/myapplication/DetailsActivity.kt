@@ -3,6 +3,7 @@ package kz.tokarev.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_details.*
+import kz.tokarev.myapplication.domain.Film
 
 class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
