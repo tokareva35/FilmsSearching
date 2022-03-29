@@ -1,19 +1,21 @@
 package kz.tokarev.myapplication.view.fragments
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_details.*
 import kz.tokarev.myapplication.R
+import kz.tokarev.myapplication.data.ApiConstants
 import kz.tokarev.myapplication.databinding.FragmentDetailsBinding
 import kz.tokarev.myapplication.domain.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
     private lateinit var binding: FragmentDetailsBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,15 +27,14 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setFilmsDetails()
 
         binding.detailsFabFavorites.setOnClickListener {
             if (!film.isInFavorites) {
-                details_fab_favorites.setImageResource(R.drawable.ic_baseline_favorite_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_24)
                 film.isInFavorites = true
             } else {
-                details_fab_favorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 film.isInFavorites = false
             }
         }
@@ -62,7 +63,10 @@ class DetailsFragment : Fragment() {
         //Устанавливаем заголовок
         binding.detailsToolbar.title = film.title
         //Устанавливаем картинку
-        binding.detailsPoster.setImageResource(film.poster)
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
         //Устанавливаем описание
         binding.detailsDescription.text = film.description
 
