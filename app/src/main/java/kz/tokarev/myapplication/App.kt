@@ -3,6 +3,9 @@ package kz.tokarev.myapplication
 import android.app.Application
 import kz.tokarev.myapplication.di.AppComponent
 import kz.tokarev.myapplication.di.DaggerAppComponent
+import kz.tokarev.myapplication.di.modules.DatabaseModule
+import kz.tokarev.myapplication.di.modules.DomainModule
+import kz.tokarev.myapplication.di.modules.RemoteModule
 
 class App : Application() {
     lateinit var dagger: AppComponent
@@ -11,7 +14,11 @@ class App : Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
-        dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {

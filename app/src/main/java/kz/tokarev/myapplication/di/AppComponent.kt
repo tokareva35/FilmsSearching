@@ -5,7 +5,9 @@ import kz.tokarev.myapplication.di.modules.DatabaseModule
 import kz.tokarev.myapplication.di.modules.DomainModule
 import kz.tokarev.myapplication.di.modules.NewModule
 import kz.tokarev.myapplication.di.modules.RemoteModule
+import kz.tokarev.myapplication.viewmodel.FavoritesFragmentViewModel
 import kz.tokarev.myapplication.viewmodel.HomeFragmentViewModel
+import kz.tokarev.myapplication.viewmodel.SettingsFragmentViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -14,11 +16,13 @@ import javax.inject.Singleton
     modules = [
         RemoteModule::class,
         DatabaseModule::class,
-        DomainModule::class,
-        NewModule::class
+        DomainModule::class
     ]
 )
 interface AppComponent {
-    //метод для того, чтобы появилась внедрять зависимости в HomeFragmentViewModel
+    //метод для того, чтобы появилась возможность внедрять зависимости в HomeFragmentViewModel
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
+    //метод для того, чтобы появилась возможность внедрять зависимости в SettingsFragmentViewModel
+    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
+    fun inject(favoritesFragmentViewModel: FavoritesFragmentViewModel)
 }

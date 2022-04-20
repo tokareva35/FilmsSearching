@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import kz.tokarev.myapplication.App
 import kz.tokarev.myapplication.domain.Film
 import kz.tokarev.myapplication.domain.Interactor
-import kz.tokarev.myapplication.utils.BindsNewInterface
 import javax.inject.Inject
 
 class HomeFragmentViewModel : ViewModel() {
@@ -15,20 +14,19 @@ class HomeFragmentViewModel : ViewModel() {
     @Inject
     lateinit var interactor: Interactor
 
-    @Inject
-    lateinit var newClass: BindsNewInterface
-
     init {
         App.instance.dagger.inject(this)
+        getFilms()
+    }
 
-        newClass.doSomething()
-
+    fun getFilms() {
         interactor.getFilmsFromApi(1, object : ApiCallback {
             override fun onSuccess(films: List<Film>) {
                 filmsListLiveData.postValue(films)
             }
 
             override fun onFailure() {
+                filmsListLiveData.postValue(interactor.getFilmsFromDB())
             }
         })
     }
