@@ -2,11 +2,10 @@ package kz.tokarev.myapplication.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kz.tokarev.myapplication.API
 import kz.tokarev.myapplication.R
 import kz.tokarev.myapplication.databinding.ActivityMainBinding
-import kz.tokarev.myapplication.domain.Film
+import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.view.fragments.*
 
 class MainActivity : AppCompatActivity() {

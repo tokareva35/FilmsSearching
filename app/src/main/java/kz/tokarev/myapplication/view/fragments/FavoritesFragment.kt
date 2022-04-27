@@ -11,7 +11,7 @@ import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
 import kz.tokarev.myapplication.view.MainActivity
 import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import kz.tokarev.myapplication.databinding.FragmentFavoritesBinding
-import kz.tokarev.myapplication.domain.Film
+import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.utils.AnimationHelper
 
 class FavoritesFragment : Fragment() {

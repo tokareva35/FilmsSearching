@@ -13,7 +13,7 @@ import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
 import kz.tokarev.myapplication.view.MainActivity
 import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import kz.tokarev.myapplication.databinding.FragmentHomeBinding
-import kz.tokarev.myapplication.domain.Film
+import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.utils.AnimationHelper
 import kz.tokarev.myapplication.viewmodel.HomeFragmentViewModel
 
