@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import kz.tokarev.myapplication.R
 import kz.tokarev.myapplication.data.ApiConstants
 import kz.tokarev.myapplication.databinding.FragmentDetailsBinding
-import kz.tokarev.myapplication.domain.Film
+import kz.tokarev.myapplication.data.Entity.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film

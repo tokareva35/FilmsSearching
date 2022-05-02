@@ -2,6 +2,7 @@ package kz.tokarev.myapplication.domain
 
 import kz.tokarev.myapplication.API
 import kz.tokarev.myapplication.data.*
+import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.data.Entity.TmdbResultsDto
 import kz.tokarev.myapplication.data.Preferences.PreferenceProvider
 import kz.tokarev.myapplication.utils.Converter
@@ -19,7 +20,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                 //Кладем фильмы в бд
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
                 callback.onSuccess(list)
             }
