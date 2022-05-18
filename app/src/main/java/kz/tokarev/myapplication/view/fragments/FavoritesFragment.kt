@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
@@ -41,7 +42,7 @@ class FavoritesFragment : Fragment() {
             })
             //Присваиваем адаптер
             adapter = filmsAdapter
-            //Присвои layoutmanager
+            //Присвоим layoutmanager
             layoutManager = LinearLayoutManager(requireContext())
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(8)
@@ -50,4 +51,5 @@ class FavoritesFragment : Fragment() {
         //Кладем нашу БД в RV
         filmsAdapter.addItems(favoritesList)
     }
+
 }
