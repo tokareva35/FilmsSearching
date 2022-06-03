@@ -25,6 +25,9 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="permission_storage">Нет разрешения. Пожалуйста, предоставьте разрешение</string>
+    <string name="downloaded_to_gallery">"Сохранено в галерею"</string>
+    <string name="open">В галерею</string>
 </resources>
 
 
