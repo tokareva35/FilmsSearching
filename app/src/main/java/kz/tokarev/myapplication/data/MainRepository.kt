@@ -1,10 +1,8 @@
 package kz.tokarev.myapplication.data
 
-import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.data.dao.FilmDao
-import java.util.concurrent.Executors
 
 class MainRepository(private val filmDao: FilmDao) {
 
@@ -12,6 +10,6 @@ class MainRepository(private val filmDao: FilmDao) {
         filmDao.insertAll(films)
     }
 
-    fun getAllFromDB(): Flow<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Observable<List<Film>> = filmDao.getCachedFilms()
 
 }
