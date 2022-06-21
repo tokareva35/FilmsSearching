@@ -9,7 +9,6 @@ import kz.tokarev.myapplication.databinding.FragmentWatchLaterBinding
 import kz.tokarev.myapplication.utils.AnimationHelper
 
 class WatchLaterFragment : Fragment() {
-
     private lateinit var binding: FragmentWatchLaterBinding
 
     override fun onCreateView(
@@ -22,6 +21,6 @@ class WatchLaterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(watch_later_fragment_root, requireActivity(), 3)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.watchLaterFragmentRoot, requireActivity(), 3)
     }
 }

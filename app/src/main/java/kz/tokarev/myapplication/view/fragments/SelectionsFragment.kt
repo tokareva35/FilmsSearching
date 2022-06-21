@@ -10,9 +10,7 @@ import kz.tokarev.myapplication.databinding.FragmentSelectionsBinding
 import kz.tokarev.myapplication.utils.AnimationHelper
 
 class SelectionsFragment : Fragment() {
-
     private lateinit var binding: FragmentSelectionsBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +21,6 @@ class SelectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(selections_fragment_root, requireActivity(), 4)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.selectionsFragmentRoot, requireActivity(), 4)
     }
 }
