@@ -2,6 +2,7 @@ package kz.tokarev.myapplication.di.modules
 
 import dagger.Module
 import dagger.Provides
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import kz.tokarev.myapplication.BuildConfig
 import kz.tokarev.myapplication.data.ApiConstants
 import kz.tokarev.myapplication.data.TmdbApi
@@ -35,6 +36,8 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем поддержку RxJava
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
         .build()
