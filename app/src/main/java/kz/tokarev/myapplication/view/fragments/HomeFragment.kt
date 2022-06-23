@@ -1,44 +1,46 @@
 package kz.tokarev.myapplication.view.fragments
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_home.*
-import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
-import kz.tokarev.myapplication.view.MainActivity
-import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
-import kz.tokarev.myapplication.databinding.FragmentHomeBinding
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.tokarev.myapplication.data.Entity.Film
+import kz.tokarev.myapplication.databinding.FragmentHomeBinding
 import kz.tokarev.myapplication.utils.AnimationHelper
+import kz.tokarev.myapplication.utils.AutoDisposable
+import kz.tokarev.myapplication.utils.addTo
+import kz.tokarev.myapplication.view.MainActivity
+import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
+import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import kz.tokarev.myapplication.viewmodel.HomeFragmentViewModel
+import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
-    private var filmsDataBase = listOf<Film>()
-        //Используем backing field
-        set(value) {
-            //Если придет такое же значение то мы выходим из метода
-            if (field == value) return
-            //Если пришло другое значение, то кладем его в переменную
-            field = value
-            //Обновляем RV адаптер
-            filmsAdapter.addItems(field)
-        }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -49,37 +51,32 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
         initSearchView()
-
+        initPullToRefresh()
         //находим наш RV
-        initRecycler()
+        initRecyckler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-        })
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
 
-
-
-    }
-
-    private fun initSearchView() {
-        search_view.setOnClickListener {
-            search_view.isIconified = false
-        }
-        //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+            }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
+            }
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
@@ -94,9 +91,58 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initRecycler() {
-        main_recycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
+    private fun initSearchView() {
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+        }
+
+        Observable.create(ObservableOnSubscribe<String> { subscriber ->
+            //Вешаем слушатель на клавиатуру
+            binding.searchView.setOnQueryTextListener(object :
+            //Вызывается на ввод символов
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String): Boolean {
+                    filmsAdapter.items.clear()
+                    subscriber.onNext(newText)
+                    return false
+                }
+                //Вызывается по нажатию кнопки "Поиск"
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    subscriber.onNext(query)
+                    return false
+                }
+            })
+        })
+            .subscribeOn(Schedulers.io())
+            .map {
+                it.toLowerCase(Locale.getDefault()).trim()
+            }
+            .debounce(800, TimeUnit.MILLISECONDS)
+            .filter {
+                //Если в поиске пустое поле, возвращаем список фильмов по умолчанию
+                viewModel.getFilms()
+                it.isNotBlank()
+            }
+            .flatMap {
+                viewModel.getSearchResult(it)
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onError = {
+                    Toast.makeText(requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show()
+                },
+                onNext = {
+                    filmsAdapter.addItems(it)
+                }
+            )
+            .addTo(autoDisposable)
+    }
+
+    private fun initRecyckler() {
+        binding.mainRecycler.apply {
+            filmsAdapter =
+                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
                         (requireActivity() as MainActivity).launchDetailsFragment(film)
                     }
@@ -113,6 +159,6 @@ class HomeFragment : Fragment() {
 
 }
 
-
-
-
+private fun androidx.appcompat.widget.SearchView.setOnQueryTextListener(onQueryTextListener: SearchView.OnQueryTextListener) {
+    TODO("Not yet implemented")
+}

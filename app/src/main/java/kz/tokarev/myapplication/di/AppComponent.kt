@@ -3,9 +3,7 @@ package kz.tokarev.myapplication.di
 import dagger.Component
 import kz.tokarev.myapplication.di.modules.DatabaseModule
 import kz.tokarev.myapplication.di.modules.DomainModule
-import kz.tokarev.myapplication.di.modules.NewModule
 import kz.tokarev.myapplication.di.modules.RemoteModule
-import kz.tokarev.myapplication.viewmodel.FavoritesFragmentViewModel
 import kz.tokarev.myapplication.viewmodel.HomeFragmentViewModel
 import kz.tokarev.myapplication.viewmodel.SettingsFragmentViewModel
 import javax.inject.Singleton
@@ -24,5 +22,5 @@ interface AppComponent {
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
     //метод для того, чтобы появилась возможность внедрять зависимости в SettingsFragmentViewModel
     fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
-    fun inject(favoritesFragmentViewModel: FavoritesFragmentViewModel)
+
 }
