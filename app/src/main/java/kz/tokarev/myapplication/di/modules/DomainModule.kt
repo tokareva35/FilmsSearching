@@ -5,9 +5,10 @@ import dagger.Module
 import dagger.Provides
 import kz.tokarev.myapplication.data.MainRepository
 import kz.tokarev.myapplication.data.Preferences.PreferenceProvider
-import kz.tokarev.myapplication.data.TmdbApi
 import kz.tokarev.myapplication.domain.Interactor
 import javax.inject.Singleton
+import kz.tokarev.remote_module.TmdbApi
+
 
 @Module
 //Передаем контекст для SharedPreferences через конструктор

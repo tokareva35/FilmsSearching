@@ -1,6 +1,7 @@
-package kz.tokarev.myapplication.data.Entity
+package kz.tokarev.remote_module.entity
 
 import com.google.gson.annotations.SerializedName
+import kz.tokarev.remote_module.entity.TmdbFilm
 
 data class TmdbResultsDto(
     @SerializedName("page")

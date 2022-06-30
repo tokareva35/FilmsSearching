@@ -10,7 +10,6 @@ import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.view.fragments.*
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         //Передаем его в метод
         setContentView(binding.root)
-        println(API.KEY)
 
         initNavigation()
-        //Запускаем фрагмент при старте
+        //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
@@ -30,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
+
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
         val bundle = Bundle()
@@ -87,6 +86,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
     private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
 
     private fun changeFragment(fragment: Fragment, tag: String) {
@@ -96,5 +97,4 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
 }

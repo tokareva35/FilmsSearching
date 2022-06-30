@@ -20,10 +20,10 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import kz.tokarev.myapplication.R
-import kz.tokarev.myapplication.data.ApiConstants
 import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.databinding.FragmentDetailsBinding
 import kz.tokarev.myapplication.viewmodel.DetailsFragmentViewModel
+import kz.tokarev.remote_module.entity.ApiConstants
 
 
 class DetailsFragment : Fragment() {
