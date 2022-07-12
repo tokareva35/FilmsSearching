@@ -22,6 +22,7 @@ import kotlinx.coroutines.*
 import kz.tokarev.myapplication.R
 import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.databinding.FragmentDetailsBinding
+import kz.tokarev.myapplication.view.notifications.NotificationHelper
 import kz.tokarev.myapplication.viewmodel.DetailsFragmentViewModel
 import kz.tokarev.remote_module.entity.ApiConstants
 
@@ -72,6 +73,10 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
     }
 

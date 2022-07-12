@@ -20,11 +20,8 @@ class ConnectionChecker : BroadcastReceiver() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
             //Если пришло подключение к зарядке
-            Intent.ACTION_POWER_CONNECTED -> {Toast.makeText(
-                context,
-                "Зарядка подключена",
-                Toast.LENGTH_SHORT
-            ).show()
+            Intent.ACTION_POWER_CONNECTED -> {
+                Toast.makeText(context,"Зарядка подключена",Toast.LENGTH_SHORT).show()
                 //Режим ночной темы выключается
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
