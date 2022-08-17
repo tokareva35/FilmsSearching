@@ -5,15 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kz.tokarev.myapplication.view.rv_adapters.FilmListRecyclerAdapter
-import kz.tokarev.myapplication.view.MainActivity
 import kz.tokarev.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import kz.tokarev.myapplication.databinding.FragmentFavoritesBinding
 import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.utils.AnimationHelper
+import kz.tokarev.myapplication.view.MainActivity
 
 class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter

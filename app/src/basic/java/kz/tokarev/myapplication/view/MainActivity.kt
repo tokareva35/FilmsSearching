@@ -1,12 +1,13 @@
 package kz.tokarev.myapplication.view
+
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kz.tokarev.myapplication.API
 import kz.tokarev.myapplication.R
-import kz.tokarev.myapplication.databinding.ActivityMainBinding
 import kz.tokarev.myapplication.data.Entity.Film
+import kz.tokarev.myapplication.databinding.ActivityMainBinding
 import kz.tokarev.myapplication.view.fragments.*
 
 class MainActivity : AppCompatActivity() {
@@ -55,14 +56,12 @@ class MainActivity : AppCompatActivity() {
                     val tag = "home"
                     val fragment = checkFragmentExistence(tag)
                     //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
-                    //элвиса мы вызываем создание нвого фрагмента
+                    //элвиса мы вызываем создание нового фрагмента
                     changeFragment( fragment?: HomeFragment(), tag)
                     true
                 }
                 R.id.favorites -> {
-                    val tag = "favorites"
-                    val fragment = checkFragmentExistence(tag)
-                    changeFragment( fragment?: FavoritesFragment(), tag)
+                    Toast.makeText(this, "Доступно в Pro версии", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.watch_later -> {
@@ -72,9 +71,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.selections -> {
-                    val tag = "selections"
-                    val fragment = checkFragmentExistence(tag)
-                    changeFragment( fragment?: SelectionsFragment(), tag)
+                    Toast.makeText(this, "Доступно в Pro версии", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.settings -> {

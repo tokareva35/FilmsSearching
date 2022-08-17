@@ -13,7 +13,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kz.tokarev.myapplication.view.rv_viewholders.FilmViewHolder
-import kz.tokarev.myapplication.view.MainActivity
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
