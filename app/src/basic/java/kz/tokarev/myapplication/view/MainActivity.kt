@@ -1,18 +1,26 @@
 package kz.tokarev.myapplication.view
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kz.tokarev.myapplication.API
+import kz.tokarev.myapplication.App
 import kz.tokarev.myapplication.R
 import kz.tokarev.myapplication.data.Entity.Film
 import kz.tokarev.myapplication.databinding.ActivityMainBinding
+import kz.tokarev.myapplication.receivers.ConnectionChecker
 import kz.tokarev.myapplication.view.fragments.*
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,35 +28,64 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         //Передаем его в метод
         setContentView(binding.root)
-        println(API.KEY)
 
         initNavigation()
-        //Запускаем фрагмент при старте
+        //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
 
-    }
-    fun launchDetailsFragment(film: Film) {
-        //Создаем "посылку"
-        val bundle = Bundle()
-        //Кладем наш фильм в "посылку"
-        bundle.putParcelable("film", film)
-        //Кладем фрагмент с деталями в перменную
-        val fragment = DetailsFragment()
-        //Прикрепляем нашу "посылку" к фрагменту
-        fragment.arguments = bundle
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
 
-        //Запускаем фрагмент
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_placeholder, fragment)
-            .addToBackStack(null)
-            .commit()
+        if (!App.instance.isPromoShown) {
+            //Получаем доступ к Remote Config
+            val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+            //Устанавливаем настройки
+            val configSettings = FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(0)
+                .build()
+            firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
+            //Вызываем метод, которые получит данные с сервера и вешаем слушатель
+            firebaseRemoteConfig.fetch()
+                .addOnCompleteListener {
+                    //Если все получилось успешно
+                    if (it.isSuccessful) {
+                        //активируем последний полученный конфиг с сервера
+                        firebaseRemoteConfig.activate()
+                        //Получаем ссылку
+                        val filmLink = firebaseRemoteConfig.getString("film_link")
+                        //Если поле не пустое
+                        if (filmLink.isNotBlank()) {
+                            //Ставим флаг что уже промо показали
+                            App.instance.isPromoShown = true
+                            //Включаем промо верстку
+                            binding.promoViewGroup.apply {
+                                //Делаем видимой
+                                visibility = View.VISIBLE
+                                //Анимируем появление
+                                animate()
+                                    .setDuration(1500)
+                                    .alpha(1f)
+                                    .start()
+                                //Вызываем метод, который загрузит постер в ImageView
+                                setLinkForPoster(filmLink)
+                                //Кнопка, по нажатии на которую промо убереться(желательно сделать отдельную кнопку с крестиком)
+                                watchButton.setOnClickListener {
+                                    visibility = View.GONE
+                                }
+                            }
+                        }
+                    }
+                }
+        }
     }
-
     private fun initNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
